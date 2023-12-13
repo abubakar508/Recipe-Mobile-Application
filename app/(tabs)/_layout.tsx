@@ -1,12 +1,25 @@
+// expo vector-icons
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable, useColorScheme } from 'react-native';
+import { Entypo } from '@expo/vector-icons'; 
 
+//expo-router
+import { Link, Tabs } from 'expo-router';
+
+//react-native components
+import { Pressable, TouchableOpacity, useColorScheme } from 'react-native';
+
+
+// colors
 import Colors from '../../constants/Colors';
 
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
+
+//components
+import ScreenHeaderBtn from '../../components/ScreenHeaderBtn';
+
+
+//routing dependency
+import { useNavigation } from '@react-navigation/native';
+
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>['name'];
   color: string;
@@ -17,6 +30,14 @@ function TabBarIcon(props: {
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
+  // Define navigation 
+  const navigation = useNavigation()
+
+  const handlePress = () => {
+    console.log("button pressed" )
+
+  }
+
   return (
     <Tabs
       screenOptions={{
@@ -25,29 +46,31 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: '',
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           headerRight: () => (
-            <Link href="/modal" asChild>
+            <ScreenHeaderBtn
+            iconUrl={require("../../assets/images/Abisma.png")}
+            onPress={handlePress}
+             />
+          ),
+          headerLeft: () => (
+            <TouchableOpacity onPress={handlePress}>
               <Pressable>
                 {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
+                  <Entypo name="menu" size={42} color="black" />
                 )}
               </Pressable>
-            </Link>
+            </TouchableOpacity>
           ),
         }}
       />
+      
       <Tabs.Screen
         name="two"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: '',
+          tabBarIcon: ({ color }) => <TabBarIcon name="heart" color={color} />,
         }}
       />
     </Tabs>

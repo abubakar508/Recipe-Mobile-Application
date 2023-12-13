@@ -8,5 +8,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-  ]
+, "constants/Image.jsx", "constants/Image.jsx", "constants/Image.js", "data/db.js"  ]
 }
